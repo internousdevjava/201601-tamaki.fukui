@@ -37,7 +37,7 @@ public class LoginDAO extends ActionSupport{
 	/*
 	 * 更新件数
 	 * */
-	private ResultSet rs;
+	private int rs;
 
 
 	/**
