@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -34,10 +35,6 @@ public class LoginDAO extends ActionSupport{
 	 * */
 	private String sql;
 	/*
-	 * sql文の雛形を準備
-	 * */
-	private PreparedStatement ps;
-	/*
 	 * 更新件数
 	 * */
 	private ResultSet rs;
@@ -51,26 +48,27 @@ public class LoginDAO extends ActionSupport{
 	 * @return res 保存に成功したらtrue、失敗したらfalseを返します。
 	 */
 	public boolean selectDB(String name, String password){
-		res = false;
+	       res = false;
 
-		try{
-			con = (Connection)DBConnector.getConnection("sample");
-			sql = "insert into login(name,password)values('"+name+"','"+password+"')";
-			sql+= " name = ? AND password = ? ";
 
-			ps = con.prepareStatement(sql);
-			ps.setString(1, name);
-			ps.setString(2, password);
+	        try{
+	            con = DBConnector.getConnection("sample");
 
-			rs = ps.executeQuery();
+	            Statement stm = con.createStatement();
+	            sql  = "insert into login(name,password)values('"+name+"','"+password+"')";
 
-			if(rs.next()){
-				res = true;
-			}
-		}
-		catch(SQLException e){
-			e.printStackTrace();
-		}
-		return res;
-	}
+	            rs = stm.executeUpdate(sql);
+
+	                if(rs==1){
+	                    res = true;
+	                    }
+
+	        }
+	        catch(SQLException e){
+	            e.printStackTrace();
+	        }
+	        return res;
+
+	    }
 }
+
