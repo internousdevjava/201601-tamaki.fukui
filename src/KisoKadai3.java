@@ -42,11 +42,11 @@ public class KisoKadai3 {
 		case 1:
 
 			System.out.println("ファイル名を入力してください：");
-
+			System.out.println("例：c:\\\\xxx\\\\xxx");
 			String 新規ファイル名 = new java.util.Scanner(System.in).nextLine();
 
 
-			File newfile = new File( "c:\\tmp\\" + 新規ファイル名 + ".txt" );
+			File newfile = new File( 新規ファイル名 + ".txt" );
 
 
 		    try{
@@ -185,7 +185,7 @@ public class KisoKadai3 {
 			        System.out.print((char)ch);
 			      }
 
-			      
+
 			      filereader.close();
 			 }catch(FileNotFoundException e){
 			      System.out.println(e);
